@@ -1,3 +1,4 @@
+build:
 deploy:
   ssh:
     host: 10.64.14.42
