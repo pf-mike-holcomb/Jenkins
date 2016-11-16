@@ -1,4 +1,4 @@
-image: library/jenkins
+image: registry.hub.docker.com/library/jenkins:latest
 deploy:
   ssh:
     host: 10.64.14.42
