@@ -1,4 +1,4 @@
-build:
+image: library/jenkins
 deploy:
   ssh:
     host: 10.64.14.42
