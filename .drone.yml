@@ -1,0 +1,24 @@
+deploy:
+  ssh:
+    host: 10.64.14.42 # one of the swarm managers
+    user: ubuntu # username to ssh into the machine
+    port: 22
+    commands:
+      - docker service rm platform-jenkins
+      - docker service create --name=platform-jenkins --network=proxy -e "ASPNETCORE_SERVER.URLS=http://*:5000" --label "com.df.notify=true" --label "com.df.distribute=true" --label "com.df.serviceDomain=platform-jenkins.shared-dev.pf-labs.net" --label "com.df.servicePath=/" --label "com.df.port=5000" registry.hub.docker.com/library/jenkins:latest
+    when:
+      repo: pf-mike-holcomb/Jenkins
+      branch: develop
+      event: push   
+
+notify:
+  email:
+    from: drone@pf-labs.net
+    host: $$SMTP_SERVER
+    username: $$SMTP_USER
+    password: $$SMTP_PWD
+    recipients:
+      - mike.holcomb@peoplefluent.com
+      - curtis.mitchell@peoplefluent.com
+    when:
+      repo: pf-mike-holcomb/Jenkins
