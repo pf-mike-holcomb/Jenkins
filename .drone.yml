@@ -1,11 +1,12 @@
+build:
 deploy:
   ssh:
-    host: 10.64.14.42 # one of the swarm managers
-    user: ubuntu # username to ssh into the machine
+    host: 10.64.14.42
+    user: ubuntu
     port: 22
     commands:
       - docker service rm platform-jenkins
-      - docker service create --name=platform-jenkins --network=proxy -e "ASPNETCORE_SERVER.URLS=http://*:5000" --label "com.df.notify=true" --label "com.df.distribute=true" --label "com.df.serviceDomain=platform-jenkins.shared-dev.pf-labs.net" --label "com.df.servicePath=/" --label "com.df.port=5000" registry.hub.docker.com/library/jenkins:latest
+      - docker service create --name=platform-jenkins --network=proxy --label "com.df.notify=true" --label "com.df.distribute=true" --label "com.df.serviceDomain=platform-jenkins.shared-dev.pf-labs.net" --label "com.df.servicePath=/" --label "com.df.port=8080" jenkins:2.19.2 
     when:
       repo: pf-mike-holcomb/Jenkins
       branch: develop
