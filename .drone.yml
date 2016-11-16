@@ -1,7 +1,7 @@
 deploy:
   ssh:
-    host: 10.64.14.42 # one of the swarm managers
-    user: ubuntu # username to ssh into the machine
+    host: 10.64.14.42
+    user: ubuntu
     port: 22
     commands:
       - docker service rm platform-jenkins
